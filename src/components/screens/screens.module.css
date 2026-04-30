@@ -1,0 +1,156 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 24px 20px;
+  gap: 16px;
+  text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal {
+  background-image: url('/src/assets/felt-texture.png');
+  background-repeat: repeat;
+  background-color: #1a4a22;
+  border-radius: 12px;
+  padding: 28px 24px;
+  width: 88%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+
+.logoWrap {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.logo {
+  width: 100%;
+  display: block;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 1.6rem;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+.subtitle {
+  color: #ffffff;
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.scoreDisplay {
+  color: #f5c842;
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+.buttonStack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 240px;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background-color: #790000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: opacity 0.15s;
+}
+
+.btn:hover {
+  opacity: 0.88;
+}
+
+.btnSecondary {
+  background-color: #3a3a3a;
+}
+
+.btnGhost {
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  box-shadow: none;
+  font-size: 0.85rem;
+  padding: 6px;
+}
+
+.rulesList {
+  color: #ffffff;
+  text-align: left;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  padding-left: 20px;
+  margin: 0;
+  max-width: 320px;
+}
+
+.rulesList li {
+  margin-bottom: 8px;
+}
+
+.scoreTable {
+  width: 100%;
+  max-width: 320px;
+  color: #ffffff;
+}
+
+.scoreHeader {
+  display: grid;
+  grid-template-columns: 2rem 1fr 1fr;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scoreRow {
+  display: grid;
+  grid-template-columns: 2rem 1fr 1fr;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 1rem;
+}
