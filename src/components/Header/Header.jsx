@@ -11,13 +11,13 @@ export default function Header({ timeLeft, score, onPause }) {
   return (
     <div className={styles.header}>
       <div className={styles.stat}>
-        {formatTime(timeLeft)}
         <span className={styles.label}>TIME</span>
+        {formatTime(timeLeft)}
       </div>
-      <button className={styles.pauseBtn} onClick={onPause} aria-label="Pause">⏸</button>
+      {onPause && <button className={styles.pauseBtn} onClick={onPause}>Pause</button>}
       <div className={styles.stat} style={{ textAlign: 'right' }}>
-        {formatMoney(score)}
         <span className={styles.label}>SCORE</span>
+        {formatMoney(score)}
       </div>
     </div>
   )

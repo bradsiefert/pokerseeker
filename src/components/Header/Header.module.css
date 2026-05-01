@@ -1,41 +1,43 @@
 .header {
   width: 100%;
-  background-image: url('/src/assets/wood-header.png');
-  background-repeat: repeat-x;
-  background-size: auto 100%;
+  background-color: #121212;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  height: 52px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  height: 48px;
   flex-shrink: 0;
 }
 
 .stat {
+  width: fit-content;
+  min-width: 64px;
+  text-align: left;
   color: #ffffff;
   font-size: 1.6rem;
   letter-spacing: 0.03em;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
 }
 
 .label {
   font-size: 0.65rem;
   opacity: 0.75;
   display: block;
-  text-align: center;
 }
 
 .pauseBtn {
-  background: none;
+  background-color: #790000;
   border: none;
-  color: white;
+  color: #ffffff;
   font-family: inherit;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 4px 8px;
-  opacity: 0.85;
+  padding: 6px 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: opacity 0.15s;
 }
 
 .pauseBtn:hover {
-  opacity: 1;
+  opacity: 0.88;
 }

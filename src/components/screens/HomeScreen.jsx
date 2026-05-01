@@ -1,15 +1,25 @@
-import styles from './screens.module.css'
+import styles from './HomeScreen.module.css'
 
-export default function HomeScreen({ onStart, onRules, onHighScores }) {
+const RULES = [
+  'Make as many 5 card hands as you can in 2 minutes.',
+  'Time & money will be added whenever you make a hand.',
+  'Only cards next to each other (including diagonal) can be used to make the 5 card hands.',
+  'Have fun 🤙.',
+]
+
+export default function HomeScreen({ onStart, onHighScores }) {
   return (
     <div className={styles.screen}>
-      <div className={styles.logoWrap}>
-        <img src="/src/assets/wood-header.png" alt="Pokerseeker" className={styles.logo} />
-      </div>
-      <div className={styles.buttonStack}>
+      <div className={styles.inner}>
         <button className={styles.btn} onClick={onStart}>New Game</button>
-        <button className={`${styles.btn} ${styles.btnSecondary}`} onClick={onHighScores}>High Scores</button>
-        <button className={`${styles.btn} ${styles.btnSecondary}`} onClick={onRules}>Rules</button>
+        <button className={styles.btnSecondary} onClick={onHighScores}>High Scores</button>
+
+        <h2 className={styles.rulesTitle}>Game Rules</h2>
+        <ul className={styles.rulesList}>
+          {RULES.map((rule, i) => (
+            <li key={i}>{rule}</li>
+          ))}
+        </ul>
       </div>
     </div>
   )

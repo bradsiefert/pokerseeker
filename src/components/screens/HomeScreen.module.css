@@ -1,0 +1,68 @@
+.screen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 24px 16px;
+}
+
+.inner {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn {
+  background-color: #790000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 1.7rem;
+  cursor: pointer;
+  width: 100%;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: opacity 0.15s;
+}
+
+.btn:hover {
+  opacity: 0.88;
+}
+
+.btnSecondary {
+  composes: btn;
+  background-color: #3a3a3a;
+}
+
+.rulesTitle {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 8px 0 0;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.rulesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rulesList li {
+  color: #ffffff;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+
+.rulesList li::before {
+  content: '— ';
+}
