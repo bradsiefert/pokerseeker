@@ -1,4 +1,5 @@
 import { useGame } from './hooks/useGame.js'
+import TopBar from './components/TopBar/TopBar.jsx'
 import HomeScreen from './components/screens/HomeScreen.jsx'
 import RulesScreen from './components/screens/RulesScreen.jsx'
 import GameScreen from './components/screens/GameScreen.jsx'
@@ -13,6 +14,7 @@ export default function App() {
 
   return (
     <div className={styles.app}>
+      <TopBar />
       <div className={styles.inner}>
         {phase === 'home' && (
           <HomeScreen onStart={startGame} onRules={goToRules} onHighScores={goHighScores} />

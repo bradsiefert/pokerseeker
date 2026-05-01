@@ -6,13 +6,22 @@
   background-image: url('/src/assets/felt-texture.png');
   background-repeat: repeat;
   background-color: #1a4a22;
+  display: flex;
+  flex-direction: column;
 }
 
 .inner {
   width: 100%;
   max-width: 768px;
   margin: 0 auto;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
+}
+
+/* Full width so Rules (and similar) scrollbars sit on the viewport edge, not inset in the column */
+.innerViewportScroll {
+  max-width: none;
+  margin: 0;
 }
