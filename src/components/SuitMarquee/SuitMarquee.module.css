@@ -1,0 +1,76 @@
+.marquee {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  flex-shrink: 0;
+  padding: 16px 0;
+}
+
+.track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: scroll 45s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.card {
+  width: 160px;
+  height: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+}
+
+.top {
+  flex: 1;
+  background-color: #e8e4dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rank {
+  font-size: 4.5rem;
+  font-weight: bold;
+  line-height: 1;
+  color: #121212;
+}
+
+.rank.red {
+  color: #790000;
+}
+
+.bottom {
+  flex: 0 0 42%;
+  background-color: #121212;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 4px 6px;
+}
+
+.bottomRed {
+  background-color: #790000;
+}
+
+.suitName {
+  font-size: 1.1rem;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+.suitIcon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+}

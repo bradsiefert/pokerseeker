@@ -1,0 +1,21 @@
+.marquee {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  flex-shrink: 0;
+  padding: 24px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  align-items: center;
+  animation: scroll 50s linear infinite;
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

@@ -1,0 +1,27 @@
+.stage {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  flex-shrink: 0;
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+}
+
+.cardWrap {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  animation: slideIn 0.9s cubic-bezier(0.22, 0.9, 0.3, 1) forwards;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.5));
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(80vw, 70vh) rotate(22deg);
+    opacity: 0;
+  }
+  to {
+    transform: translate(calc(-50% + var(--final-x)), var(--final-y)) rotate(var(--final-rot));
+    opacity: 1;
+  }
+}
