@@ -1,8 +1,9 @@
 @font-face {
   font-family: 'SignPainter';
-  src: url('/src/assets/SignPainterHouseSlant.otf') format('opentype');
+  src: url('/src/assets/SignPainterHouseSlant.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 *, *::before, *::after {

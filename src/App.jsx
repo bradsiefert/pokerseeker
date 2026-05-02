@@ -7,15 +7,15 @@ import HighScoresScreen from './components/screens/HighScoresScreen.jsx'
 import styles from './App.module.css'
 
 export default function App() {
-  const { state, tapCard, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand } = useGame()
+  const { state, tapCard, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand, debugEndGame } = useGame()
   const { phase } = state
 
-  const actions = { tapCard, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand }
+  const actions = { tapCard, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand, debugEndGame }
 
   return (
     <div className={styles.app}>
-      <TopBar />
-      <div className={styles.inner}>
+      <TopBar onSignInClick={goHighScores} />
+      <div className={(phase === 'rules' || phase === 'home' || phase === 'highScores') ? styles.innerFull : styles.inner}>
         {phase === 'home' && (
           <HomeScreen onStart={startGame} onRules={goToRules} onHighScores={goHighScores} />
         )}
@@ -26,7 +26,7 @@ export default function App() {
           <GameScreen state={state} actions={actions} />
         )}
         {phase === 'highScores' && (
-          <HighScoresScreen onNewGame={startGame} onHome={goHome} />
+          <HighScoresScreen onHome={goHome} />
         )}
       </div>
     </div>
