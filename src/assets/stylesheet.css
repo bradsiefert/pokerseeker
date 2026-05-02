@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'SignPainter HouseSlant';
+    src: url('SignPainterHouseSlant.eot');
+    src: url('SignPainterHouseSlant.eot?#iefix') format('embedded-opentype'),
+        url('SignPainterHouseSlant.woff2') format('woff2'),
+        url('SignPainterHouseSlant.woff') format('woff'),
+        url('SignPainterHouseSlant.ttf') format('truetype'),
+        url('SignPainterHouseSlant.svg#SignPainterHouseSlant') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
