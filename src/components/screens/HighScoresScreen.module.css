@@ -1,0 +1,149 @@
+.screen {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.inner {
+  width: 100%;
+  max-width: 480px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px 16px 40px;
+  flex-shrink: 0;
+}
+
+.btn {
+  background-color: #790000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 1.7rem;
+  cursor: pointer;
+  width: 100%;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: background-color 0.15s;
+}
+
+.btn:hover {
+  background-color: #5e0000;
+}
+
+.btnSecondary {
+  composes: btn;
+  background-color: #121212;
+}
+
+.btnSecondary:hover {
+  background-color: #2e2e2e;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  margin: 8px 0;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 3rem;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+.authSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.authButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.authBtn {
+  background-color: #ffffff;
+  color: #121212;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 1.3rem;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.15s;
+}
+
+.authBtn:hover {
+  background-color: #e8e8e8;
+}
+
+.authBtnSecondary {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.authBtnSecondary:hover {
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+.authNote {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+}
+
+.empty {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 0;
+  padding: 24px 0;
+}
+
+.table {
+  width: 100%;
+  color: #ffffff;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 1fr 1.6fr;
+  gap: 8px;
+  padding: 4px 0 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 0.7rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 1fr 1.6fr;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1.375rem;
+}

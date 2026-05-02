@@ -10,7 +10,7 @@ export default function PauseScreen({ timeLeft, score, onResume, onRules, onHome
         <Header timeLeft={timeLeft} score={score} />
         <div className={styles.buttonRow}>
           <button className={styles.btn} onClick={onResume}>Resume Game</button>
-          <button className={styles.btn} onClick={onRules}>Poker Rules</button>
+          <button className={styles.btn} onClick={onRules}>Game Rules</button>
         </div>
         <button className={styles.btnGhost} onClick={onHome}>Quit Game</button>
       </div>
