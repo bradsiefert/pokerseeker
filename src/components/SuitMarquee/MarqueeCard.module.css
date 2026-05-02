@@ -68,23 +68,23 @@
 }
 
 .suitName {
-  font-size: 1.1rem;
+  font-size: 1.7rem;
   color: #ffffff;
   font-weight: bold;
   letter-spacing: 0.04em;
 }
 
-.sm .suitName { font-size: 0.7rem; }
-.md .suitName { font-size: 0.9rem; }
-.xl .suitName { font-size: 1.3rem; }
+.sm .suitName { font-size: 1rem; }
+.md .suitName { font-size: 1.35rem; }
+.xl .suitName { font-size: 2rem; }
 
 .suitIcon {
-  width: 26px;
-  height: 26px;
+  width: 34px;
+  height: 34px;
   flex-shrink: 0;
   filter: brightness(0) invert(1);
 }
 
-.sm .suitIcon { width: 16px; height: 16px; }
-.md .suitIcon { width: 20px; height: 20px; }
-.xl .suitIcon { width: 32px; height: 32px; }
+.sm .suitIcon { width: 20px; height: 20px; }
+.md .suitIcon { width: 26px; height: 26px; }
+.xl .suitIcon { width: 42px; height: 42px; }
