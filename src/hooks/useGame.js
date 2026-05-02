@@ -17,6 +17,7 @@ function init() {
     deck: remaining,
     path: [],        // array of [row, col]
     timeLeft: INITIAL_TIME,
+    totalTime: INITIAL_TIME, // grows by timeBonus each hand — total game length when finished
     score: 0,
     lastHand: null,  // { name, score } for brief display
     invalidFlash: false,
@@ -84,6 +85,7 @@ function reducer(state, action) {
         path: [],
         score: state.score + earned,
         timeLeft: newTime,
+        totalTime: state.totalTime + timeBonus,
         lastHand: { hand, score: earned, timeBonus },
         invalidFlash: false,
       }
@@ -100,6 +102,17 @@ function reducer(state, action) {
         return { ...state, timeLeft: 0, phase: 'gameOver' }
       }
       return { ...state, timeLeft: state.timeLeft - 1 }
+    }
+
+    // TEMP debug: instantly end game with a forced top-10 score
+    case 'DEBUG_END_GAME': {
+      return {
+        ...state,
+        phase: 'gameOver',
+        timeLeft: 0,
+        score: action.score,
+        totalTime: action.totalTime ?? state.totalTime,
+      }
     }
 
     default:
@@ -128,6 +141,7 @@ export function useGame() {
   const goHighScores = useCallback(() => dispatch({ type: 'GO_HIGH_SCORES' }), [])
   const clearFlash = useCallback(() => dispatch({ type: 'CLEAR_FLASH' }), [])
   const clearLastHand = useCallback(() => dispatch({ type: 'CLEAR_LAST_HAND' }), [])
+  const debugEndGame = useCallback((score, totalTime) => dispatch({ type: 'DEBUG_END_GAME', score, totalTime }), [])
 
-  return { state, tapCard, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand }
+  return { state, tapCard, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand, debugEndGame }
 }
