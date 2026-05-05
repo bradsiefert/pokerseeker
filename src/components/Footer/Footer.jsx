@@ -27,7 +27,7 @@ export default function Footer() {
       </p>
 
       <p className={styles.lineMuted}>
-        Site set in{' '}
+        Typeset in{' '}
         <a
           href="https://housefonts.com/hi/signpainter#"
           target="_blank"

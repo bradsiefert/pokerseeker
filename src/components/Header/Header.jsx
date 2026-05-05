@@ -8,9 +8,18 @@ function formatTime(seconds) {
 }
 
 export default function Header({ timeLeft, score, onPause }) {
+  // Time pressure cues:
+  //   ≤30s → subtle pulse, ≤10s → red color, ≤5s → urgent pulse
+  const timeClass = [
+    styles.stat,
+    timeLeft <= 30 && timeLeft > 0 ? styles.timeWarn : '',
+    timeLeft <= 10 && timeLeft > 0 ? styles.timeDanger : '',
+    timeLeft <= 5  && timeLeft > 0 ? styles.timeUrgent : '',
+  ].join(' ')
+
   return (
     <div className={styles.header}>
-      <div className={styles.stat}>
+      <div className={timeClass}>
         <span className={styles.label}>TIME</span>
         {formatTime(timeLeft)}
       </div>

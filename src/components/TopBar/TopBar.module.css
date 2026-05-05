@@ -25,9 +25,9 @@
   text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
-.signInBtn {
+.signInBtn,
+.playBtn {
   position: absolute;
-  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.4);
@@ -42,12 +42,17 @@
   transition: background-color 0.15s;
 }
 
-.signInBtn:hover {
+.signInBtn { right: 12px; }
+.playBtn   { left: 12px; }
+
+.signInBtn:hover,
+.playBtn:hover {
   background-color: rgba(0, 0, 0, 0.65);
 }
 
 @media (max-width: 511px) {
-  .signUpExtra {
+  .signUpExtra,
+  .playExtra {
     display: none;
   }
 }
