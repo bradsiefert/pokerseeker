@@ -30,15 +30,15 @@ export default function HomeScreen({ onStart, onHighScores }) {
         </div>
       )}
 
-      <SuitMarquee key={variant} variant={variant} />
-
       <div className={styles.hero}>
         <span className={styles.eyebrow}>Boggle 🤝 Poker</span>
         <h1 className={styles.heroTitle}>Quick break? Play a hand.</h1>
         <p className={styles.heroSub}>
-          Waiting on your agent to finish? Play a quick hand & beat the 2-minute clock. Score, earn more time, ride the hot streak.
+          Waiting on an ai agent to finish? Play a quick hand & beat the 2-minute clock. Score, earn more time, ride the hot streak.
         </p>
       </div>
+
+      <SuitMarquee key={variant} variant={variant} />
 
       <div className={styles.inner}>
         <button className={styles.btn} onClick={onStart}>New Game</button>
