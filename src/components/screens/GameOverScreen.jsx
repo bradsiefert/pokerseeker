@@ -1,4 +1,4 @@
-import { formatMoney } from '../../game/scoring.js'
+import { formatMoney, HAND_NAMES } from '../../game/scoring.js'
 import styles from './GameOverScreen.module.css'
 
 function formatLength(seconds) {
@@ -30,8 +30,13 @@ function CelebrationBanner({ rank }) {
   )
 }
 
-export default function GameOverScreen({ score, totalTime, rank, onNewGame, onHighScores }) {
+export default function GameOverScreen({
+  score, totalTime, rank,
+  handsMade, highestCombo, bestHand,
+  onNewGame, onHighScores,
+}) {
   const length = formatLength(totalTime)
+  const hasStats = (handsMade != null && handsMade > 0)
 
   return (
     <div className={styles.overlay}>
@@ -48,7 +53,28 @@ export default function GameOverScreen({ score, totalTime, rank, onNewGame, onHi
           </p>
         )}
 
-        {!rank && (
+        {hasStats && (
+          <div className={styles.stats}>
+            {bestHand && (
+              <div className={styles.statRow}>
+                <span className={styles.statLabel}>Best hand</span>
+                <span className={styles.statValue}>{HAND_NAMES[bestHand]}</span>
+              </div>
+            )}
+            <div className={styles.statRow}>
+              <span className={styles.statLabel}>Hands made</span>
+              <span className={styles.statValue}>{handsMade}</span>
+            </div>
+            {highestCombo > 1 && (
+              <div className={styles.statRow}>
+                <span className={styles.statLabel}>Highest combo</span>
+                <span className={styles.statValue}>{highestCombo}×</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {!rank && !hasStats && (
           <p className={styles.subtitle}>Not bad. Think you can do better?</p>
         )}
 

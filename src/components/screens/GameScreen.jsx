@@ -9,14 +9,21 @@ import styles from './GameScreen.module.css'
 
 // Flip to true to surface the End → #1 / End → Top 10 helpers for testing celebrations
 const SHOW_DEBUG_BUTTONS = false
+const VALIDATION_DURATION = 420 // ms — keep in sync with .validating animation
 
 export default function GameScreen({ state, actions }) {
-  const { grid, path, timeLeft, totalTime, score, phase, lastHand, invalidFlash } = state
-  const { tapCard, pause, resume, goHome, goToRules, startGame, goHighScores, clearFlash, clearLastHand, debugEndGame } = actions
+  const {
+    grid, path, timeLeft, totalTime, score, phase, lastHand, invalidFlash, validating,
+    handsMade, highestCombo, bestHand,
+  } = state
+  const {
+    tapCard, completeHand, pause, resume, goHome, goToRules, startGame, goHighScores,
+    clearFlash, clearLastHand, debugEndGame,
+  } = actions
 
   const debugWin = (rank) => {
     if (rank === 1) {
-      debugEndGame(99999, 145) // huge score guaranteed #1
+      debugEndGame(99999, 145)
     } else {
       const randomScore = 1000 + Math.floor(Math.random() * 4000)
       debugEndGame(randomScore, 130)
@@ -34,6 +41,13 @@ export default function GameScreen({ state, actions }) {
     }
   }, [phase, score, totalTime])
 
+  // After a hand is detected, wait for the validation animation, then refill the grid
+  useEffect(() => {
+    if (!validating) return
+    const id = setTimeout(completeHand, VALIDATION_DURATION)
+    return () => clearTimeout(id)
+  }, [validating, completeHand])
+
   // Clear invalid flash after a short delay
   useEffect(() => {
     if (!invalidFlash) return
@@ -48,20 +62,37 @@ export default function GameScreen({ state, actions }) {
     return () => clearTimeout(id)
   }, [lastHand, clearLastHand])
 
+  const showVignette = phase === 'playing' && timeLeft <= 5 && timeLeft > 0
+
   return (
     <div className={styles.gameScreen}>
       <Header timeLeft={timeLeft} score={score} onPause={pause} />
 
       {lastHand && (
         <div className={styles.handToast}>
-          <span className={styles.handName}>{HAND_NAMES[lastHand.hand]}</span>
-          <span className={styles.handScore}>+{formatMoney(lastHand.score)} · +{lastHand.timeBonus}s</span>
+          <span className={styles.handName}>
+            {HAND_NAMES[lastHand.hand]}
+            {lastHand.multiplier > 1 && (
+              <span className={styles.combo}> {lastHand.multiplier}×</span>
+            )}
+          </span>
+          <span className={styles.handScore}>
+            +{formatMoney(lastHand.score)} · +{lastHand.timeBonus}s
+          </span>
         </div>
       )}
 
       <div className={styles.gridWrap}>
-        <CardGrid grid={grid} path={path} invalidFlash={invalidFlash} onTapCard={tapCard} />
+        <CardGrid
+          grid={grid}
+          path={path}
+          invalidFlash={invalidFlash}
+          validating={validating}
+          onTapCard={tapCard}
+        />
       </div>
+
+      {showVignette && <div className={styles.vignette} aria-hidden="true" />}
 
       {/* TEMP debug controls — gated by SHOW_DEBUG_BUTTONS, kept for future testing */}
       {SHOW_DEBUG_BUTTONS && phase === 'playing' && (
@@ -80,6 +111,9 @@ export default function GameScreen({ state, actions }) {
           score={score}
           totalTime={totalTime}
           rank={finalRank}
+          handsMade={handsMade}
+          highestCombo={highestCombo}
+          bestHand={bestHand}
           onNewGame={startGame}
           onHighScores={goHighScores}
         />

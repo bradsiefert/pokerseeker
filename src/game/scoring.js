@@ -12,15 +12,15 @@ export const HAND_NAMES = {
 }
 
 const SCORES = {
-  royalFlush:    10000,
-  straightFlush: 5000,
-  fourOfAKind:   3000,
-  fullHouse:     1500,
-  flush:         1000,
-  straight:      750,
-  threeOfAKind:  500,
-  twoPair:       250,
-  pair:          100,
+  royalFlush:    100000,
+  straightFlush: 50000,
+  fourOfAKind:   30000,
+  fullHouse:     15000,
+  flush:         10000,
+  straight:      7500,
+  threeOfAKind:  5000,
+  twoPair:       2500,
+  pair:          1000,
   highCard:      0,
 }
 

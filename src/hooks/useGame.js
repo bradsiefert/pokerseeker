@@ -7,6 +7,19 @@ import { getScore, getTimeBonus } from '../game/scoring.js'
 import { useTimer } from './useTimer.js'
 
 const INITIAL_TIME = 120
+const COMBO_WINDOW_MS = 5000
+
+// Worst → best, used to track best hand of game
+const HAND_RANK_ORDER = [
+  'highCard', 'pair', 'twoPair', 'threeOfAKind', 'straight',
+  'flush', 'fullHouse', 'fourOfAKind', 'straightFlush', 'royalFlush',
+]
+
+function comboMultiplier(combo) {
+  if (combo >= 3) return 2
+  if (combo === 2) return 1.5
+  return 1
+}
 
 function init() {
   const deck = createShuffledDeck()
@@ -19,8 +32,20 @@ function init() {
     timeLeft: INITIAL_TIME,
     totalTime: INITIAL_TIME, // grows by timeBonus each hand — total game length when finished
     score: 0,
-    lastHand: null,  // { name, score } for brief display
+    lastHand: null,  // { hand, score, timeBonus, multiplier } for brief display
     invalidFlash: false,
+
+    // combo
+    combo: 0,
+    lastHandAt: 0,
+
+    // end-of-game stats
+    handsMade: 0,
+    highestCombo: 0,
+    bestHand: null,
+
+    // validating flow: when set, freezes grid and shows glow on path before refill
+    validating: null, // { path, hand, basePoints, timeBonus, multiplier }
   }
 }
 
@@ -45,8 +70,11 @@ function reducer(state, action) {
       return { ...state, phase: 'highScores' }
 
     case 'TAP_CARD': {
-      const { row, col } = action
-      const { path, grid } = state
+      const { row, col, at } = action
+      const { path, grid, validating } = state
+
+      // Block input while a hand is validating
+      if (validating) return state
 
       // If already last card in path, deselect (undo last)
       const last = path[path.length - 1]
@@ -67,27 +95,61 @@ function reducer(state, action) {
       // Evaluate 5-card hand
       const cards = newPath.map(([r, c]) => grid[r][c])
       const hand = detectHand(cards)
-      const earned = getScore(hand)
+      const basePoints = getScore(hand)
 
-      if (earned === 0) {
+      if (basePoints === 0) {
         // High card — not a scoring hand, flash invalid
         return { ...state, path: [], invalidFlash: true }
       }
 
+      // Combo
+      const within = (at - state.lastHandAt) <= COMBO_WINDOW_MS
+      const newCombo = within && state.combo > 0 ? state.combo + 1 : 1
+      const multiplier = comboMultiplier(newCombo)
+      const earned = Math.round(basePoints * multiplier)
       const timeBonus = getTimeBonus(hand)
-      const { grid: newGrid, deck: newDeck } = removeAndRefill(grid, newPath, state.deck)
-      const newTime = Math.min(state.timeLeft + timeBonus, 999)
 
+      // Best hand tracking
+      const bestRank = HAND_RANK_ORDER.indexOf(state.bestHand)
+      const newRank = HAND_RANK_ORDER.indexOf(hand)
+      const newBestHand = newRank > bestRank ? hand : state.bestHand
+
+      // Stage validation — freeze grid, show glow on path. COMPLETE_HAND finishes the move.
+      return {
+        ...state,
+        path: newPath,
+        invalidFlash: false,
+        validating: {
+          path: newPath,
+          hand,
+          earned,
+          basePoints,
+          multiplier,
+          timeBonus,
+        },
+        // commit the score-related stats now so the toast/UI reflects them immediately
+        score: state.score + earned,
+        timeLeft: Math.min(state.timeLeft + timeBonus, 999),
+        totalTime: state.totalTime + timeBonus,
+        lastHand: { hand, score: earned, timeBonus, multiplier },
+        lastHandAt: at,
+        combo: newCombo,
+        handsMade: state.handsMade + 1,
+        highestCombo: Math.max(state.highestCombo, newCombo),
+        bestHand: newBestHand,
+      }
+    }
+
+    case 'COMPLETE_HAND': {
+      // Actually remove + refill cards. Triggered after a delay so the validation glow shows.
+      if (!state.validating) return state
+      const { grid: newGrid, deck: newDeck } = removeAndRefill(state.grid, state.validating.path, state.deck)
       return {
         ...state,
         grid: newGrid,
         deck: newDeck,
         path: [],
-        score: state.score + earned,
-        timeLeft: newTime,
-        totalTime: state.totalTime + timeBonus,
-        lastHand: { hand, score: earned, timeBonus },
-        invalidFlash: false,
+        validating: null,
       }
     }
 
@@ -131,7 +193,8 @@ export function useGame() {
     () => dispatch({ type: 'TICK' }),
   )
 
-  const tapCard = useCallback((row, col) => dispatch({ type: 'TAP_CARD', row, col }), [])
+  const tapCard = useCallback((row, col) => dispatch({ type: 'TAP_CARD', row, col, at: Date.now() }), [])
+  const completeHand = useCallback(() => dispatch({ type: 'COMPLETE_HAND' }), [])
   const startGame = useCallback(() => dispatch({ type: 'START_GAME' }), [])
   const goToRules = useCallback(() => dispatch({ type: 'GO_TO_RULES' }), [])
   const backFromRules = useCallback(() => dispatch({ type: 'BACK_FROM_RULES' }), [])
@@ -143,5 +206,5 @@ export function useGame() {
   const clearLastHand = useCallback(() => dispatch({ type: 'CLEAR_LAST_HAND' }), [])
   const debugEndGame = useCallback((score, totalTime) => dispatch({ type: 'DEBUG_END_GAME', score, totalTime }), [])
 
-  return { state, tapCard, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand, debugEndGame }
+  return { state, tapCard, completeHand, startGame, goToRules, backFromRules, goHome, pause, resume, goHighScores, clearFlash, clearLastHand, debugEndGame }
 }

@@ -25,6 +25,28 @@
   display: block;
 }
 
+.timeWarn {
+  animation: timePulse 1s ease-in-out infinite;
+}
+
+.timeDanger {
+  color: #ff5050;
+}
+
+.timeUrgent {
+  animation: timePulseUrgent 0.6s ease-in-out infinite;
+}
+
+@keyframes timePulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.7; }
+}
+
+@keyframes timePulseUrgent {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
 .pauseBtn {
   background-color: #790000;
   border: none;

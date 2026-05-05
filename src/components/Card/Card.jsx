@@ -14,7 +14,7 @@ const SUIT_SYMBOLS = {
 
 const RED_SUITS = new Set(['hearts', 'diamonds'])
 
-export default function Card({ card, selected, invalid, onClick }) {
+export default function Card({ card, selected, invalid, validating, onClick }) {
   const isRed = RED_SUITS.has(card.suit)
 
   return (
@@ -23,6 +23,7 @@ export default function Card({ card, selected, invalid, onClick }) {
         styles.card,
         selected ? styles.selected : '',
         invalid ? styles.invalid : '',
+        validating ? styles.validating : '',
       ].join(' ')}
       onClick={onClick}
     >
@@ -30,7 +31,6 @@ export default function Card({ card, selected, invalid, onClick }) {
         <span className={`${styles.rankLarge} ${isRed ? styles.red : ''}`}>
           {card.rank}
         </span>
-        {/* suit symbol next to number removed */}
       </div>
       <div className={`${styles.bottom} ${isRed ? styles.bottomRed : ''}`}>
         <span className={styles.suitName}>{RANK_NAMES[card.rank]}</span>
