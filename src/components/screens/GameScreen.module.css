@@ -64,7 +64,7 @@
 }
 
 .handToast {
-  position: absolute;
+  position: fixed;
   top: 60px;
   left: 50%;
   transform: translateX(-50%);
@@ -78,7 +78,19 @@
   pointer-events: none;
   z-index: 5;
   white-space: nowrap;
-  animation: fadeIn 0.2s ease;
+  animation: fadeInTop 0.2s ease;
+}
+
+@media (min-width: 512px) {
+  .handToast {
+    top: auto;
+    left: auto;
+    bottom: 24px;
+    right: 24px;
+    transform: none;
+    align-items: flex-end;
+    animation: fadeInBottom 0.2s ease;
+  }
 }
 
 .handName {
@@ -93,7 +105,12 @@
   letter-spacing: 0.03em;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInTop {
   from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fadeInBottom {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

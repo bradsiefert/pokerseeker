@@ -6,8 +6,8 @@ import { detectHand } from '../game/handDetection.js'
 import { getScore, getTimeBonus } from '../game/scoring.js'
 import { useTimer } from './useTimer.js'
 
-const INITIAL_TIME = 120
-const COMBO_WINDOW_MS = 5000
+const INITIAL_TIME = 90
+const COMBO_WINDOW_MS = 6000
 
 // Worst → best, used to track best hand of game
 const HAND_RANK_ORDER = [

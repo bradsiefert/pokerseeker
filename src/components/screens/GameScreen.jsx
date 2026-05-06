@@ -58,7 +58,7 @@ export default function GameScreen({ state, actions }) {
   // Clear last hand display after a short delay
   useEffect(() => {
     if (!lastHand) return
-    const id = setTimeout(clearLastHand, 1500)
+    const id = setTimeout(clearLastHand, 2400)
     return () => clearTimeout(id)
   }, [lastHand, clearLastHand])
 
