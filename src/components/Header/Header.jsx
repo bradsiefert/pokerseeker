@@ -23,7 +23,11 @@ export default function Header({ timeLeft, score, onPause }) {
         <span className={styles.label}>TIME</span>
         {formatTime(timeLeft)}
       </div>
-      {/* onPause && <button className={styles.pauseBtn} onClick={onPause}>Pause</button> */}
+      {onPause && (
+        <button type="button" className={styles.pauseBtn} onClick={onPause}>
+          Pause
+        </button>
+      )}
       <div className={styles.stat} style={{ textAlign: 'right' }}>
         <span className={styles.label}>SCORE</span>
         {formatMoney(score)}
