@@ -51,7 +51,7 @@ export default function HighScoresScreen({ onHome }) {
       <div className={styles.inner}>
         <button className={styles.btn} onClick={onHome}>Home</button>
 
-        <hr className={styles.divider} />
+        {/* <hr className={styles.divider} />
 
         <section className={styles.authSection}>
           <h2 className={styles.title}>Login / Sign Up</h2>
@@ -69,7 +69,7 @@ export default function HighScoresScreen({ onHome }) {
           </p>
         </section>
 
-        <hr className={styles.divider} />
+        <hr className={styles.divider} /> */}
 
         <h2 className={styles.title}>Your High Scores</h2>
 
