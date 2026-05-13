@@ -1,12 +1,6 @@
+import { SUIT_SVG_URLS } from '../../assets/suitSvgUrls.js'
 import { RANK_NAMES } from '../../game/deck.js'
 import styles from './Card.module.css'
-
-const SUIT_SVGS = {
-  spades:   '/src/assets/suits/suit-spades.svg',
-  clubs:    '/src/assets/suits/suit-clubs.svg',
-  hearts:   '/src/assets/suits/suit-hearts.svg',
-  diamonds: '/src/assets/suits/suit-diamonds.svg',
-}
 
 const SUIT_SYMBOLS = {
   spades: '♠', clubs: '♣', hearts: '♥', diamonds: '♦',
@@ -36,7 +30,7 @@ export default function Card({ card, selected, invalid, validating, onClick }) {
         <span className={styles.suitName}>{RANK_NAMES[card.rank]}</span>
         <img
           className={styles.suitIcon}
-          src={SUIT_SVGS[card.suit]}
+          src={SUIT_SVG_URLS[card.suit]}
           alt={card.suit}
         />
       </div>
